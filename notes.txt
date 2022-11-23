@@ -1,0 +1,14 @@
+# need a passage of time
+# is this going to be a set up then run or turn based?
+# how about both!
+# initially turn based, but program saves the actions you did and does a single 
+# run through at the end
+
+# thinking of only using a 3x3 grid
+# would be easier to calculate and min/max each cell
+# more variety per cell (cell is a 3x3 grid)
+# but less complexity
+# if i am trying to have edge cells interact with each other, the smalled would 
+# be better - saving the location as an index would be best then
+
+# i like the vibe of console based"

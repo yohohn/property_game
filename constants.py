@@ -1,7 +1,7 @@
 import pygame
 
-SCREEN_WIDTH = 1400
-SCREEN_HEIGHT = 800
+SCREEN_WIDTH = 700
+SCREEN_HEIGHT = 400
 
 FONT = pygame.font.SysFont('consolas', 20)
 

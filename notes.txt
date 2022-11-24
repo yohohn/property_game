@@ -12,3 +12,15 @@
 # be better - saving the location as an index would be best then
 
 # i like the vibe of console based"
+
+
+
+
+return a menu and a function to be executed
+confirmation text?
+table headers?
+
+
+list of tuples
+list represents each option
+each tuple - (title,next_menu,function)

@@ -24,3 +24,17 @@ table headers?
 list of tuples
 list represents each option
 each tuple - (title,next_menu,function)
+
+
+
+buy a store
+    check if can afford
+new menu asking where
+    check if possible
+update places to know there is a store
+    cell
+    store
+    user
+        this seems to be too much
+        could save this data in the map
+            ((1,1), store, john)x

@@ -1,10 +1,8 @@
-
-
-
+import pygame
+import constants
 class building():
     def __init__(self):
-
-
+        self.location = None
         # every building needs a location
         # could just do a two element list (or a tuple)
 
@@ -15,6 +13,13 @@ class building():
 class store(building):
     def __init__(self):
         super().__init__()
+
+        # first creat the object
+        self.image = pygame.Surface((150,150))
+        # then fill in the object
+        self.image.fill(constants.RED)
+        
+
 
     def calc_net(self):
         self.income = 1000

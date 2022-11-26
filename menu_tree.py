@@ -1,36 +1,42 @@
-import menu
 import pygame
 import sys
-import map_tree
-import characters, cell
+import menu, map_tree, characters
 
 def quit_game():
     pygame.quit()
     sys.exit()
 
 def select_purchase(property):
-    global selected_property
-    selected_property = property
+    if property == None:
+        if characters.user.stored_property != None:
+            characters.user.update_money(+characters.user.stored_property.cost)
+            characters.user.stored_property = None
+    elif property.cost < characters.user.money:
+        characters.user.update_money(-property.cost)
+        characters.user.stored_property = property
+    
+def iter_turn():
+    characters.user.calc_turn()
 
-john = characters.john
-default_menu = menu.menu()
-buy_menu = menu.menu()
-sell_menu = menu.menu()
-upgrade_menu = menu.menu()
-property_menu = menu.menu()
-map_menu = menu.menu()
+default_menu = menu.menu(0b00000000, None)
+buy_menu = menu.menu(0b00000001, default_menu)
+buy_map_menu = menu.menu(0b10000001, buy_menu)
 
 default_menu.append('Quit game.', None, quit_game)
-default_menu.append('Upgrade a property.', upgrade_menu, None)
-default_menu.append('Sell a property.', sell_menu, None)
 default_menu.append('Buy a property.', buy_menu, None)
-default_menu.append('Advance a new day.', None, None)
+default_menu.append('Advance a new day.', None, iter_turn)
+default_menu.append_text('Press tab to select map location.')
 
-buy_menu.append('Return to previous menu.', default_menu, None)
-sell_menu.append('Return to previous menu.', default_menu, None)
-upgrade_menu.append('Return to previous menu.', default_menu, None)
-map_menu.append(
-    'Cancel the purchase and return to previous menu.', buy_menu, None
+buy_menu.append('Return to main menu.', default_menu, None)
+for buyable_building in map_tree.BUYABLE_BUILDINGS:
+    buy_menu.append(
+        buyable_building.buy_menu_string, buy_map_menu, select_purchase, buyable_building
+    )
+buy_menu.append_text('{:20} {:>10} {:>10} {:>10}'.format('to Purchase','Cost','Income','Expense'))
+buy_menu.append_text('{:20} {:>10} {:>10} {:>10}'.format('Select Property Name','Purchase','Weekly','Weekly'))
+
+
+buy_map_menu.append(
+    'Cancel the purchase and return to buy menu.', buy_menu, select_purchase, None
 )
-
-buy_menu.append('Buy a store', map_menu, select_purchase, cell.store)
+buy_map_menu.append_text('Press tab to select map location.')

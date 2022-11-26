@@ -14,7 +14,7 @@ class curser():
 
         self.map_highlight = pygame.Surface((150,25))
         self.map_highlight.fill(constants.ORANGE)
-        self.map_highlight.set_alpha(128)
+        #self.map_highlight.set_alpha(128)
 
     def select_mode(self, mode, max_location):
         self.mode = mode
@@ -89,7 +89,10 @@ class curser():
             self.select_mode(0b01, current_cell.cell_size)
         else:
             self.select_mode(0b00, current_menu.length)
+            
         
 
     def print_curser(self):
         constants.SCREEN.blit(self.highlight, self.print_location)
+
+game_curser  = curser()

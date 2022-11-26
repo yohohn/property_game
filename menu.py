@@ -1,9 +1,13 @@
-import constants
+import constants, curser
 
 class menu():
-    def __init__(self):
+    def __init__(self, code, parent_menu):
+        self.code = code
+        self.parent_menu = parent_menu
         self.options = []
+        self.texts = []
         self.length = 0
+        self.text_length = 0
 
     # add new option to options
     def append(self, text, next_space, function, *args):
@@ -11,20 +15,30 @@ class menu():
         self.options.append(option)
         self.length += 1
         option.set_location(self.length)
+    
+    # add non-selectable option to be printed
+    def append_text(self, text):
+        text_option = menu_option(text, None, None)
+        self.texts.append(text_option)
+        self.text_length += 1
+        text_option.set_location(self.length + self.text_length)
 
     # print all options to screen
     def print(self):
         for option in self.options:
-            constants.SCREEN.blit(option.surface_text, (12,option.location))
+            constants.SCREEN.blit(option.surface_text, (12, option.location))
+        for text in self.texts:
+            constants.SCREEN.blit(text.surface_text, (12, text.location))
 
-    def select(self, curser):
-        option = self.options[curser.location]
+    def select(self):
+        option = self.options[curser.game_curser.location]
         option.call_function()
         if option.next_space != None:
-            curser.select_mode(0b00, option.next_space.length)
+            curser.game_curser.select_mode(0b00, option.next_space.length)
             return option.next_space
         else:
             return self
+    
         
 
 class menu_option():

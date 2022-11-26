@@ -2,14 +2,11 @@ import menu
 import pygame
 import sys
 import map_tree
-import properties, characters, curser
+import characters, cell
 
 def quit_game():
     pygame.quit()
     sys.exit()
-
-def buy_property():
-    map_tree.start_cell.change_property((1,1),properties.store(), john)
 
 def select_purchase(property):
     global selected_property
@@ -36,4 +33,4 @@ map_menu.append(
     'Cancel the purchase and return to previous menu.', buy_menu, None
 )
 
-buy_menu.append('Buy a store', map_menu, select_purchase, properties.store())
+buy_menu.append('Buy a store', map_menu, select_purchase, cell.store)

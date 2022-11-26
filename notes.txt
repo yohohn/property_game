@@ -115,11 +115,11 @@ How it could happen - need less calculations
 1. get the current ticks
 2. Handle any events
     # this should call the calculations
-# any drawing shouldnt do calculations
-3. blank the screen
-4. draw the map
-NEW: 5. draw curser - just the one
-6. draw the menu                                IN PROGRESS
+# any drawing shouldnt do calculations          OKAY
+3. blank the screen                             OKAY
+4. draw the map                                 DONE
+NEW: 5. draw curser - just the one              DONE
+6. draw the menu                                DONE
 7. draw the player's resources                  DONE
 8. update the display                           OKAY
 9. limit the fps to 60 fps                      OKAY

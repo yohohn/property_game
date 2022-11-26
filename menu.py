@@ -3,12 +3,14 @@ import constants
 class menu():
     def __init__(self):
         self.options = []
+        self.length = 0
 
     # add new option to options
     def append(self, text, next_space, function, *args):
         option = menu_option(text,next_space, function, *args)
         self.options.append(option)
-        option.set_location(len(self.options))
+        self.length += 1
+        option.set_location(self.length)
 
     # print all options to screen
     def print(self):
@@ -19,7 +21,7 @@ class menu():
         option = self.options[curser.location]
         option.call_function()
         if option.next_space != None:
-            curser.select_mode(0b00, len(option.next_space.options) - 1)
+            curser.select_mode(0b00, option.next_space.length)
             return option.next_space
         else:
             return self

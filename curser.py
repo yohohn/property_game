@@ -16,10 +16,9 @@ class curser():
         self.map_highlight.fill(constants.ORANGE)
         self.map_highlight.set_alpha(128)
 
-        
     def select_mode(self, mode, max_location):
         self.mode = mode
-        self.max_location = max_location
+        self.max_location = max_location - 1
         self.movement = 0b0000
         # menu mode
         if   mode == 0b00:
@@ -84,6 +83,13 @@ class curser():
                 if self.location[0] < self.max_location:
                     self.location[0] += 1
                     self.print_location[0] += 160
+
+    def tab(self, current_menu, current_cell):
+        if self.mode != 0b01:
+            self.select_mode(0b01, current_cell.cell_size)
+        else:
+            self.select_mode(0b00, current_menu.length)
+        
 
     def print_curser(self):
         constants.SCREEN.blit(self.highlight, self.print_location)

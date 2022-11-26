@@ -1,25 +1,25 @@
 import pygame
 import sys
-def event_handler(current_menu, curser):
+def event_handler(curser, current_space):
     for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            elif event.type == pygame.KEYDOWN:
-                # arrow key up
-                if event.key == 1073741906:
-                    curser.curser_movement = True
-                    curser.curser_direction = True
-                # arrow key down 
-                elif event.key == 1073741905:
-                    curser.curser_movement = True
-                    curser.curser_direction = False
-                # keyboard enter or numpad enter
-                elif event.key == 13 or event.key == 1073741912:
-                    current_menu = current_menu.select(curser)
-                    
-            elif event.type == pygame.KEYUP:
-                # arrow key up or arrow key down
-                if event.key == 1073741906 or event.key == 1073741905:
-                    curser.curser_movement = False
-    return current_menu
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+        elif event.type == pygame.KEYDOWN:
+            # escape
+            if event.key == 27:
+                curser.location = 0
+                current_space = current_space.select(curser)
+            # keyboard enter or numpad enter
+            elif event.key == 13 or event.key == 1073741912:
+                current_space = current_space.select(curser)
+            elif event.key == pygame.K_UP:
+                curser.movement = 0b1000
+            elif event.key == pygame.K_DOWN:
+                curser.movement = 0b0100
+            elif event.key == pygame.K_LEFT:
+                curser.movement = 0b0010
+            elif event.key == pygame.K_RIGHT:
+                curser.movement = 0b0001
+    
+    return current_space

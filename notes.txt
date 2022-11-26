@@ -38,3 +38,88 @@ update places to know there is a store
         this seems to be too much
         could save this data in the map
             ((1,1), store, john)x
+
+11111111 & 00001111 = 15
+1111 & 0010
+1111 & 0100
+1111 & 1000
+if xxxx0000:
+    return
+0001
+0010
+0011
+0100
+0101
+0110
+0111
+1000
+1001
+1010
+1011
+1100
+1101
+1110
+1111
+
+
+
+how to fix the menu system
+
+idk
+
+can keep a 'current_space' variable
+    stores what should handle inputs
+
+right now, current_space is always a menu object
+
+tree:
+main_menu
+    buy_menu
+        map_mode!?!?!?!
+
+
+currently, every iteration of the while loop:
+1. handle any events
+    1. if any arrow key up/down
+        1. update menu curser's location
+    2. if escape
+        1. select menu option 0
+    3. if tab
+        1. update menu curser's 5th last bit 
+    4. if enter
+        1. select menu option at menu currents location
+    5. if game quit
+        1. quit game
+2. get the current ticks
+3. blank the screen
+4. draw the map
+    1. calculate some things (not everything that is drawn)
+    2. draw the map to screen
+5. draw the menu
+    1. calculate the curser's position
+        1. decide which curser to calculate
+        2. check if any movement flags are set
+        3. if they are, check if enough time has passed
+        4. check if in bounds, if so then move the curser
+    2. print the curser's position
+        1. decide if map curser should also be printed
+        2. convert (both) curser's index to screen coords
+        3. draw curser(s) to screen
+    3. calculate then print each menu option
+6. draw the player's resources
+7. update the display
+8. limit the fps to 60fps
+    
+
+How it could happen - need less calculations 
+1. get the current ticks
+2. Handle any events
+    # this should call the calculations
+# any drawing shouldnt do calculations
+3. blank the screen
+4. draw the map
+NEW: 5. draw curser - just the one
+6. draw the menu                                IN PROGRESS
+7. draw the player's resources                  DONE
+8. update the display                           OKAY
+9. limit the fps to 60 fps                      OKAY

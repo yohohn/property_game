@@ -63,13 +63,42 @@ class cell():
             constants.SCREEN.blit(owner_string, owner_coords)
 
 class cell_curser():
-    def __init__(self):
-        self.location = 0
+    def __init__(self, cell_size):
+        self.max_coord = cell_size - 1
+        self.coords = [0,0]
+        self.last_curser_update = 0 
         self.selected = pygame.Surface((150,25))
         self.selected.fill(constants.ORANGE)
-        self.selected.set_alpha(128)
+        self.selected.set_alpha(128)   
+
+    # check if the curser needs to be updated
+    def calc_curser(self, movement, current_ticks):
+        # only true if last four bits of movement are zero
+        if ~movement & 0b00001111 == 0b00001111:
+            return
+        # check if enough time has passed
+        elif current_ticks - self.last_curser_update > 100:
+            self.last_curser_update = current_ticks
+            # right
+            if movement & 0b00000001:
+                if self.coords[0] < self.max_coord:
+                    self.coords[0] += 1
+            # left
+            if movement & 0b00000010:
+                if self.coords[0] > 0:
+                    self.coords[0] -= 1
+            # down
+            if movement & 0b00000100:
+                if self.coords[1] < self.max_coord:
+                    self.coords[1] += 1
+            # up
+            if movement & 0b00001000:
+                if self.coords[1] > 0:
+                    self.coords[1] -= 1
+
+            
         
 
-    def print_curser(self, coords):
-        coords = (coords[0], coords[1]+125)
+    def print_curser(self):
+        coords = (self.coords[0]*160+10, self.coords[1]*160+135)
         constants.SCREEN.blit(self.selected,coords)

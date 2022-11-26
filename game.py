@@ -1,30 +1,33 @@
 import pygame
 pygame.init()
-import constants, event_handler, characters
+import constants, event_handler, characters, curser
 import menu_tree, map_tree
 
 john = characters.john
-current_menu = menu_tree.default_menu
+current_space = menu_tree.default_menu
 cell = map_tree.start_cell
-curser = menu_tree.curser
+game_curser = curser.curser()
 cell_curser = map_tree.cell_curser
+game_curser.select_mode(0b00,len(current_space.options)-1)
 
 while True:
-    current_menu = event_handler.event_handler(current_menu, curser)
-
-    constants.SCREEN.fill(constants.DARK_GRAY)
-    
     current_ticks = pygame.time.get_ticks()
-    
-    current_menu.print(curser, current_ticks)
-    john.print_resources()
+    current_space = event_handler.event_handler(game_curser, current_space)
+    constants.SCREEN.fill(constants.DARK_GRAY)
+
+    game_curser.move(current_ticks)
+    game_curser.print_curser()
+
+
+
     cell.print_cell()
-    pygame.display.update()
+    current_space.print()
+    john.print_resources()
     
-    b = constants.CLOCK.get_fps()
-    a = constants.CLOCK.tick(60)
+    pygame.display.update()
 
 
+    constants.CLOCK.tick(60)   
 
 
 

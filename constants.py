@@ -1,4 +1,4 @@
-import pygame, characters
+import pygame
 
 SCREEN_WIDTH = 1400
 SCREEN_HEIGHT = 800
@@ -14,8 +14,6 @@ CLOCK = pygame.time.Clock()
 pygame.display.set_caption('Property Game')
 ICON = pygame.Surface((1,1))
 pygame.display.set_icon(ICON)
-
-JOHN = characters.playable_character()
 
 
 WHITE = (255,255,255)
